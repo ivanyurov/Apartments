@@ -48,9 +48,8 @@ int main()
 			std::cout << std::endl;
 			continue;
 		}
-		if (act == 1) 
-		{
-			//read database from .dat file 
+		if (act == 1) //read database from .dat file
+		{ 
 			char fileName[64];
 			std::cout << "Enter file name:\n";
 			std::cin >> fileName;
@@ -65,18 +64,24 @@ int main()
 				file.close();
 			}
 		}
-		if (act == 2) 
+		if (act == 2) //write database into .dat file
 		{
-			//write database in .dat file
 			char fileName[64];
 			std::cout << "Enter file name:\n";
 			std::cin >> fileName;
 			std::ofstream file(fileName);
-			file << base;
+			if (!file)
+			{
+				std::cout << "Can't open file\n";
+			}
+			else
+			{
+				file << base;
+				file.close();
+			}
 		}
-		if (act == 3)
+		if (act == 3) //create new apartment
 		{
-			//add apartment to database
 			apartment tmp;
 			std::cin >> tmp;
 			dataBase tmpBase(base.getSize() + 1);
@@ -88,7 +93,7 @@ int main()
 			base = tmpBase;
 		}
 
-		if (act == 4) //delete apartment by ID
+		if (act == 4) //delete apartment from database by ID
 		{
 			int ID_;
 			std::cout << "Enter apartment ID\n";
@@ -115,7 +120,7 @@ int main()
 			}
 			else { std::cout << "Wrong ID\n"; }
 		}
-		if (act == 5) //print database (full / with selected room count)
+		if (act == 5) //print base (full / with selected number of rooms)
 		{
 			int num;
 			std::cout << "Enter the number of rooms, if any, enter 0\n";
@@ -143,22 +148,30 @@ int main()
 				} else { std::cout << "No matching apartments\n"; }
 			} else { std::cout << base; }
 		}
-	    if (act == 6) //write database in .txt file
+	    if (act == 6) //write database into .txt file
 		{
 			char fileName[64];
 			std::cout << "Enter file name\n";
 			std::cin >> fileName;
 			std::ofstream file(fileName);
-			int ID, price, roomcount, floor, area;
-			char date[16];
-			char address[64];
-			for (int i = 0; i < base.getSize(); ++i)
+			if (!file)
 			{
-				ID = base[i].getID(); strncpy_s(date, base[i].getDate(), 16); price = base[i].getPrice(); roomcount = base[i].getRoomCount(); floor = base[i].getFloor(); area = base[i].getArea(); strncpy_s(address, base[i].getAddress(), 64);
-				file << ID << ", " << date << ", " << price << ", " << roomcount << ", " << floor << ", " << area << ", " << address << ".";
+				std::cout << "Can't open file\n";
+			}
+			else 
+			{
+				int ID, price, roomcount, floor, area;
+				char date[16];
+				char address[64];
+				for (int i = 0; i < base.getSize(); ++i)
+				{
+					ID = base[i].getID(); strncpy_s(date, base[i].getDate(), 16); price = base[i].getPrice(); roomcount = base[i].getRoomCount(); floor = base[i].getFloor(); area = base[i].getArea(); strncpy_s(address, base[i].getAddress(), 64);
+					file << ID << ", " << date << ", " << price << ", " << roomcount << ", " << floor << ", " << area << ", " << address << "."<<std::endl;
+				}
+				file.close();
 			}
 		}
-		if (act == 7)  //find matching apartment for swap
+		if (act == 7)  //search matching apartment for swap
 		{
 			int ID_;
 			std::cout << "Enter apartment ID\n";
@@ -211,7 +224,6 @@ int main()
 		d[i] = b[i];
 	}
 	std::cout << d;
-	std::cout << 500/sizeof(apartment);
 	system("pause");
 	return 0;
 }
