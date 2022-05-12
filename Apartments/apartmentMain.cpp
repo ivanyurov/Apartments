@@ -50,7 +50,7 @@ int main()
 		}
 		if (act == 1) 
 		{
-			//узнать размер файла, инициализировать массив и прочитать из файла. 
+			//read database from .dat file 
 			char fileName[64];
 			std::cout << "Enter file name:\n";
 			std::cin >> fileName;
@@ -67,7 +67,7 @@ int main()
 		}
 		if (act == 2) 
 		{
-			//создать файл и записать в него базу
+			//write database in .dat file
 			char fileName[64];
 			std::cout << "Enter file name:\n";
 			std::cin >> fileName;
@@ -76,7 +76,7 @@ int main()
 		}
 		if (act == 3)
 		{
-			//создать новый объект
+			//add apartment to database
 			apartment tmp;
 			std::cin >> tmp;
 			dataBase tmpBase(base.getSize() + 1);
@@ -88,7 +88,7 @@ int main()
 			base = tmpBase;
 		}
 
-		if (act == 4) //удалить объект из базы
+		if (act == 4) //delete apartment by ID
 		{
 			int ID_;
 			std::cout << "Enter apartment ID\n";
@@ -115,7 +115,7 @@ int main()
 			}
 			else { std::cout << "Wrong ID\n"; }
 		}
-		if (act == 5) //вывод (вся база \ по количеству комнат)
+		if (act == 5) //print database (full / with selected room count)
 		{
 			int num;
 			std::cout << "Enter the number of rooms, if any, enter 0\n";
@@ -143,7 +143,7 @@ int main()
 				} else { std::cout << "No matching apartments\n"; }
 			} else { std::cout << base; }
 		}
-	    /*if (act == 6) //вывести в текстовый файл
+	    if (act == 6) //write database in .txt file
 		{
 			char fileName[64];
 			std::cout << "Enter file name\n";
@@ -157,8 +157,8 @@ int main()
 				ID = base[i].getID(); strncpy_s(date, base[i].getDate(), 16); price = base[i].getPrice(); roomcount = base[i].getRoomCount(); floor = base[i].getFloor(); area = base[i].getArea(); strncpy_s(address, base[i].getAddress(), 64);
 				file << ID << ", " << date << ", " << price << ", " << roomcount << ", " << floor << ", " << area << ", " << address << ".";
 			}
-		}*/
-		if (act == 7)  //поиск для обмена
+		}
+		if (act == 7)  //find matching apartment for swap
 		{
 			int ID_;
 			std::cout << "Enter apartment ID\n";
