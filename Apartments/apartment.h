@@ -56,7 +56,7 @@ class dataBase
 	int size_;
 	apartment* base_;
 public:
-	dataBase(int size=0, const apartment* base=nullptr)
+	explicit dataBase(int size=0, const apartment* base=nullptr)
 	{
 		if (size > 0) 
 		{
